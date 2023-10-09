@@ -38,7 +38,7 @@
                 <div id="caixa_pesquisar" class="caixa azul">
                     <button onclick="openmodal()" id="new">+<i></i></button>
                     <input type="text" id="barrapesquisar" placeholder="Pesquisar..." />
-                    <button onclick="exportTableToExcel('employeeList', 'Cátalogo de Sistemas')"> Export Table Data To Excel File</button>
+                    <button id="export-excel" onclick="exportTableToExcel('employeeList', 'Cátalogo de Sistemas')">Exportar Excel</button>
                     
 
                 </div>
@@ -56,8 +56,8 @@
                             <th>Acessa via Web?</th>
                             <th>Possui Informação Sigilosa?</th>
                             <th>Qual Informação Sigilosa?</th>
-                            <th>Editar </th>
-                            <th>Excluir
+                            <th id="id1">Editar </th>
+                            <th id="id2">Excluir
                             </th>
                         </tr>
                     </thead>
@@ -104,7 +104,7 @@
                     <label for="informacaoSigilosa">Possui Informação Sigilosa?</label>
                     <input type="radio" id="simInfoSigilosa" name="simInfoSigilosa" value="Sim"
                         onclick="mostrarCampoSigiloso()">Sim
-                    <input type="radio" id="naoInfoSigilosa" name="naoInfoSigilosa" value="Não">Não
+                    <input type="radio" id="naoInfoSigilosa" name="naoInfoSigilosa" value="Não" checked>Não
                     <br>
                     <div id="campoInfoSigilosa">
                         <label for="qualInfoSigilosa">Qual Informação Sigilosa?</label>
@@ -140,7 +140,8 @@
             document.getElementById("naoInfoSigilosa").addEventListener("click", ocultarCampoSigiloso)
         </script>
         <script src="PARTE05.js"></script>
-        <script type="text/javascript" src="https://unpkg.com/xlsx@0.15.1/dist/xlsx.full.min.js"></script>
+        
+        <script type="text/javascript" src="https://unpkg.com/xlsx@0.18.0/dist/xlsx.full.min.js"></script>
 
 
 
