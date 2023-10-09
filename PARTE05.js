@@ -295,34 +295,62 @@ function loadItens() {
 
 
 
-function exportTableToExcel(employeeList, filename = ''){
+function exportTableToExcel(employeeList, filename = '') {
   let downloadLink;
   const dataType = 'application/vnd.ms-excel';
   const tableSelect = document.getElementById(employeeList);
-  const tableHTML = tableSelect.outerHTML.replace(/ /g, '%20');
+
+  // Clone a tabela para evitar afetar a tabela na página da web
+  const tableClone = tableSelect.cloneNode(true);
+
+  // Adicionar estilos para alinhamento, centralização e bordas ao HTML gerado
+  const tableRows = tableClone.getElementsByTagName('tr');
+  for (let i = 0; i < tableRows.length; i++) {
+    const tableCells = tableRows[i].querySelectorAll('th, td');
+    for (let j = 0; j < tableCells.length; j++) {
+      tableCells[j].style.textAlign = 'center'; // Centralizar horizontalmente
+      tableCells[j].style.verticalAlign = 'middle'; // Alinhar verticalmente no meio
+      tableCells[j].style.border = '1px solid #000'; // Adicionar borda
+      
+      // Adicione uma cor cinza ao cabeçalho (se for um elemento 'th')
+      if (i === 0) {
+        tableCells[j].style.backgroundColor = '#CCCCCC'; // Cor cinza
+        tableCells[j].style.fontWeight = 'bold'; // Texto em negrito
+
+        // Defina o tamanho da fonte para cabeçalhos como 14pt
+        tableCells[j].style.fontSize = '14pt'; // Tamanho da fonte 14pt
+      } else {
+        // Defina o tamanho da fonte para células de dados como 12pt
+        tableCells[j].style.fontSize = '12pt'; // Tamanho da fonte 12pt
+      }
+    }
+  }
+
+  // Converte a tabela clonada em HTML
+  const tableHTML = tableClone.outerHTML.replace(/ /g, '%20');
   
-  // Specify file name
-  filename = filename?filename+'.xls':'excel_data.xls';
+  // Especificar o nome do arquivo
+  filename = filename ? filename + '.xls' : 'excel_data.xls';
   
-  // Create download link element
+  // Cria o elemento de link de download
   downloadLink = document.createElement("a");
   
   document.body.appendChild(downloadLink);
   
-  if(navigator.msSaveOrOpenBlob){
-      var blob = new Blob(['\ufeff', tableHTML], {
-          type: dataType
-      });
-      navigator.msSaveOrOpenBlob( blob, filename);
-  }else{
-      // Create a link to the file
-      downloadLink.href = 'data:' + dataType + ', ' + tableHTML;
+  if (navigator.msSaveOrOpenBlob) {
+    var blob = new Blob(['\ufeff', tableHTML], {
+        type: dataType
+    });
+    navigator.msSaveOrOpenBlob(blob, filename);
+  } else {
+    // Cria um link para o arquivo
+    downloadLink.href = 'data:' + dataType + ', ' + tableHTML;
   
-      // Setting the file name
-      downloadLink.download = filename;
-      
-      //triggering the function
-      downloadLink.click();
+    // Define o nome do arquivo
+    downloadLink.download = filename;
+    
+    // Aciona a função
+    downloadLink.click();
   }
 }
 
@@ -330,4 +358,3 @@ function exportTableToExcel(employeeList, filename = ''){
 loadAndSortItens()
 updateTable()
 loadItens()
-
