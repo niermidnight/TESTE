@@ -89,9 +89,16 @@ body {
   width: 80%; /* Adicionei largura para a pesquisa ocupar 80% da tela */
 }
 
-#excel {
-  margin-left: 20px;
-  padding: 4px;
+
+#export-excel {
+  font-size: 16px; 
+  margin-left: 500px;
+  padding: 13px 20px;
+  background-color: #ffffff;
+  cursor: pointer;
+  border-radius: 16px;
+  
+  
 }
 
 #img-excel{
@@ -115,6 +122,10 @@ body {
   text-align: center;  
 }
 
+#export-excel{
+  margin-left: 20px;
+}
+
 .list td{
   border: 2px solid #f8f8f8; 
   box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.2);  
@@ -127,8 +138,10 @@ body {
 }
 
 .list tr:nth-child(even) {
-  background-color: #fadcf234;
+  background-color: #fadcf27d;
 }
+
+
 
 .pagination {
   
@@ -267,7 +280,7 @@ input[type="radio"] {
 }
 
 h1 { 
-  margin-left: 550px;  
+  margin-left: 630px;  
   font-size: 35px;  
   height: 30px;
 }
@@ -292,3 +305,5 @@ h2 {
   padding: 20px;
   border-radius: 10px 10px 0 0;
 }
+
+
